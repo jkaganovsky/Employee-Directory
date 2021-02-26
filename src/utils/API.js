@@ -1,4 +1,5 @@
 /* eslint-disable import/no-anonymous-default-export */
+// Random User Generator API call
 import axios from "axios";
 
 export default {
