@@ -1,28 +1,46 @@
-import React from "react";
-import { BrowserRouter as Router } from "react-router-dom";
+/* eslint-disable no-undef */
+import React, { Component } from "react";
 import Header from "./components/Header";
 import Search from "./components/Search";
 import Table from "./components/Table";
+import API from "./utils/API";
 
-function App() {
+class App extends Component {
+  state  = {
+    employees: [],
+    search: ""
+  }
 
-  return (
-    <Router>
+  // When the component mounts/loads, a list of available employees is acquired and gets updated in this.state.employees
+  componentDidMount() {
+    API.getRandomUser()
+      .then(response => this.setState({ employees: response.data.results }))
+      .catch(err => console.log(err));
+  }
 
-      <div>
-        <Header />
-      </div>
+  handleInputChange = event => {
+    event.preventDefault();
+    console.log(event.target.value)
+    this.setState({ search: event.target.value });
+  };
 
-      <div>
-        <Search />
-      </div>
+  render() {
+    return (
+      <>
+        <div>
+          <Header />
+        </div>
 
-      <div>
-        <Table />
-      </div>
+        <div>
+          <Search  employeeSearch = {this.state.search} nameSearch = {this.handleInputChange}   />
+        </div>
 
-    </Router>
-  );
+        <div>
+          <Table randomUser = {this.state.employees} />
+        </div>
+     </>
+    )
+  }
 
 }
 
