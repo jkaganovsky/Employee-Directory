@@ -8,20 +8,38 @@ import API from "./utils/API";
 class App extends Component {
   state  = {
     employees: [],
-    search: ""
+    search: "",
+    original: [],
+    ascending: true
   }
 
   // When the component mounts/loads, a list of available employees is acquired and gets updated in this.state.employees
   componentDidMount() {
     API.getRandomUser()
-      .then(response => this.setState({ employees: response.data.results }))
+      .then(response => {
+        this.setState({
+          employees: response.data.results,
+          original: response.data.results
+        })
+      })
       .catch(err => console.log(err));
   }
 
-  handleInputChange = event => {
+  searchFilter = event => {
     event.preventDefault();
-    console.log(event.target.value)
-    this.setState({ search: event.target.value });
+
+    const {name, value} = event.target;
+    this.setState({
+      [name]: value
+    });
+
+    const firstNameFilter = this.state.original.filter(user => {
+      return user.name.first.toLowerCase().includes(value)
+    });
+    this.setState({
+      employees: firstNameFilter
+    });
+
   };
 
   render() {
@@ -32,11 +50,17 @@ class App extends Component {
         </div>
 
         <div>
-          <Search  employeeSearch = {this.state.search} nameSearch = {this.handleInputChange}   />
+          <Search
+          employeeSearch = {this.state.search}
+          nameSearch = {this.searchFilter}
+          />
         </div>
 
         <div>
-          <Table randomUser = {this.state.employees} />
+          <Table
+          randomUser = {this.state.employees}
+          nameSearch = {this.searchFilter}
+          />
         </div>
      </>
     )
