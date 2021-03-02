@@ -6,13 +6,13 @@ function Table(props) {
     <div className="container">
       <table className="table table-striped table-hover justify-content-center">
 
-      {/* TABLE HEADERS */}
+      {/* TABLE HEAD */}
       <thead className="thead-dark">
         <tr>
           <th scope="col">
             <MaterialIcon icon="face" color="white" size="medium" />
           </th>
-          <th scope="col">First
+          <th scope="col" onClick={props.sort}>First
             <MaterialIcon icon="swap_vert" color="white" />
           </th>
           <th scope="col">Last
