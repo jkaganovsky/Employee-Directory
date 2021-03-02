@@ -6,25 +6,28 @@ Employee Directory application using React. It allows a user to view their entir
 
 ## Links
 * [Github Repository](https://github.com/jkaganovsky/employeedirectory)
+* [Github Page](https://jkaganovsky.github.io/employeedirectory/)
 * [Heroku](https://employee-user-dir.herokuapp.com/)
 
 
 ## Installation & Usage
 FEATURES
 1. Views a table of employee directories.
-1. Filters employees by name.
+1. Filters and sorts employees by first name.
 
 
 ## Content
 DEMO
 
-![HTML gif]()
+![HTML gif](./public/assets/images/employeedir.gif)
 
 
 
 ## Credits
 1. My fellow bootcamp Full Stack Web Developer, Elizabeth Brandt - https://github.com/elizabethbrandt
 1. Prior class activity review from UW Coding Bootcamp via Trilogy
+1. Searching and Sorting in REACT - https://medium.com/@josephharwood_62087/searching-and-sorting-in-react-3365a4499d3b
+1. My Trilogy Education Tutor, Phil Loy - https://www.linkedin.com/in/phillip-loy-7769b96/
 
 ## License
 MIT License
