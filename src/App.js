@@ -10,7 +10,7 @@ class App extends Component {
     employees: [],
     search: "",
     original: [],
-    ascending: true
+    sortAscend: true
   }
 
   // When the component mounts/loads, a list of available employees is acquired and gets updated in this.state.employees
@@ -25,22 +25,37 @@ class App extends Component {
       .catch(err => console.log(err));
   }
 
-  searchFilter = event => {
-    event.preventDefault();
+  handleSearch = e => {
+    e.preventDefault();
 
-    const {name, value} = event.target;
+    const {name, value} = e.target;
     this.setState({
       [name]: value
     });
 
     const firstNameFilter = this.state.original.filter(user => {
-      return user.name.first.toLowerCase().includes(value)
+      return user.name.first
+        .toLowerCase()
+        .includes(value)
     });
     this.setState({
       employees: firstNameFilter
     });
-
   };
+
+  handleSort = () => {
+    if (this.state.sortAscend) {
+      const sortedEmployees = this.state.employees.sort((a, b) => {
+        return a.name.first.localeCompare(b.name.first)
+      })
+      this.setState({ employees: sortedEmployees, sortAscend: false})
+    } else {
+      const sortedEmployees = this.state.employees.sort((a, b) => {
+        return b.name.first.localeCompare(a.name.first)
+      })
+      this.setState({ employees: sortedEmployees, sortAscend: true})
+    }
+  }
 
   render() {
     return (
@@ -52,14 +67,14 @@ class App extends Component {
         <div>
           <Search
           employeeSearch = {this.state.search}
-          nameSearch = {this.searchFilter}
+          search = {this.handleSearch}
           />
         </div>
 
         <div>
           <Table
           randomUser = {this.state.employees}
-          nameSearch = {this.searchFilter}
+          sort = {this.handleSort}
           />
         </div>
      </>
