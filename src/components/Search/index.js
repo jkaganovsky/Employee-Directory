@@ -7,11 +7,11 @@ function Search(props) {
         <input
           className="form-control mr-sm-2"
           type="search"
-          placeholder="Search"
+          placeholder="First Name"
           aria-label="Search"
           name="search"
           value={props.employeeSearch}
-          onChange={props.nameSearch} />
+          onChange={props.search} />
         <MaterialIcon icon="search" />
       </form>
     </div>
