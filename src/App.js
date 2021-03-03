@@ -33,25 +33,44 @@ class App extends Component {
       [name]: value
     });
 
-    const firstNameFilter = this.state.original.filter(user => {
+    const searchFilter = this.state.original.filter(user => {
       return user.name.first
         .toLowerCase()
-        .includes(value)
+        .includes(value.toLowerCase()) ||
+
+        user.name.last
+          .toLowerCase()
+          .includes(value.toLowerCase()) ||
+
+        user.email
+          .toLowerCase()
+          .includes(value.toLowerCase()) ||
+
+        user.phone
+          .includes(value)
     });
     this.setState({
-      employees: firstNameFilter
+      employees: searchFilter
     });
   };
 
   handleSort = () => {
     if (this.state.sortAscend) {
       const sortedEmployees = this.state.employees.sort((a, b) => {
-        return a.name.first.localeCompare(b.name.first)
+        return a.name.first
+          .localeCompare(b.name.first) ||
+
+          a.email
+            .localeCompare(b.email)
       })
       this.setState({ employees: sortedEmployees, sortAscend: false})
     } else {
       const sortedEmployees = this.state.employees.sort((a, b) => {
-        return b.name.first.localeCompare(a.name.first)
+        return b.name.first
+          .localeCompare(a.name.first) ||
+
+          b.email
+            .localeCompare(a.email)
       })
       this.setState({ employees: sortedEmployees, sortAscend: true})
     }

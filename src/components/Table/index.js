@@ -18,7 +18,7 @@ function Table(props) {
           <th scope="col">Last
             <MaterialIcon icon="swap_vert" color="white" />
           </th>
-          <th scope="col">Email
+          <th scope="col" onClick={props.sort}>Email
             <MaterialIcon icon="swap_vert" color="white" />
           </th>
           <th scope="col">Phone
